@@ -7,6 +7,11 @@ class Avaliador {
     private $maiores;
 
     public function avalia(Leilao $leilao) {
+
+        if(count($leilao->getLances()) == 0){
+            throw new InvalidArgumentException("Um leilão preciasa ter pelo menos 1 lance");
+        }
+
         foreach($leilao->getLances() as $lance) {
             if($lance->getValor() > $this->maiorDeTodos)
                 $this->maiorDeTodos = $lance->getValor();

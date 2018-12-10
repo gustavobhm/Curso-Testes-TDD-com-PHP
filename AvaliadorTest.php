@@ -142,6 +142,9 @@ class AvaliadorTest extends TestCase {
         $this->assertEquals(100, $maiores[1]->getValor(), 0.00001 );
     }
 
+    /**
+    * @expectedException InvalidArgumentException
+    */
     public function testDeveDevolverListaVaziaCasoNaoHajaLances() 
     {
         $criador = new CriadorDeLeilao();
@@ -154,6 +157,18 @@ class AvaliadorTest extends TestCase {
 
         $this->assertEquals(0, count($maiores));
     }   
+
+    /**
+    * @expectedException Exception
+    */
+    public function testeDeveRecusarLeilaoSemLances(){
+
+        $criador = new CriadorDeLeilao();
+        $leilao = $criador->para("Playstation 4")->constroi();     
+
+        $this->leiloeiro->avalia($leilao);
+
+    }
 
     public function tearDown() {
         var_dump("tearDown");
